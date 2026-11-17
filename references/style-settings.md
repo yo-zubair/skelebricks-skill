@@ -222,6 +222,7 @@ Dynamic URL composition works in `useDynamicData`: `"https://wa.me/{acf_phone}"`
 - **Direct writes to a live site (MCP/API/postmeta) where ids are preserved:** html2bricks reported that `%root%` was not resolved in that path on Bricks 2.3.5 and used `#brxe-{id}` instead. If a live write shows `%root%` literally in the frontend CSS, switch to `#brxe-{id}` for that write only.
 - **Inside a global class** → SkeleBricks rule: also `%root%` (it resolves to the class selector). Upstream notes mention the literal selector (`.card`); if `%root%` ever shows up literally in a class's frontend CSS, fall back to the literal selector and tell the user.
 - Custom CSS belongs on the BEM class, not the element (framework/PROFILE.md).
+- **Formatting:** one declaration per line, 2-space indent, `}` on its own line, blank line between rules (`\n` in the JSON string). Never minify. See framework/PROFILE.md §4a.
 
 ## Universal Settings Catalog
 

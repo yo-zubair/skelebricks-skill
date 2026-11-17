@@ -138,6 +138,42 @@ def walk_colors(val):
             yield from walk_colors(v)
 
 
+def check_css_format(where, css, errors, warns):
+    """SkeleBricks: one declaration per line, braces on their own lines, 2-space indents."""
+    lines = css.split("\n")
+    depth = 0
+    for i, line in enumerate(lines, 1):
+        stripped = line.strip()
+        if "\t" in line:
+            errors.append(f"{where}: _cssCustom line {i} uses a tab; indent with 2 spaces")
+        if line != line.rstrip():
+            errors.append(f"{where}: _cssCustom line {i} has trailing whitespace")
+        if not stripped:
+            continue
+        # strip parenthesised content so ';' / '{' inside url() or var() don't count
+        flat = re.sub(r"\([^()]*\)", "()", stripped)
+        flat = re.sub(r"\([^()]*\)", "()", flat)
+        if "{" in flat and not flat.endswith("{"):
+            errors.append(f"{where}: _cssCustom line {i} has content after '{{'; put each declaration on its own line")
+        if "}" in flat and flat != "}":
+            errors.append(f"{where}: _cssCustom line {i}: '}}' must be alone on its line")
+        if len(stripped) > 110 and re.search(r"\),\s*\S", stripped):
+            warns.append(f"{where}: _cssCustom line {i} is a long multi-layer value; put each layer on its own line")
+        if flat.count(";") > 1:
+            errors.append(f"{where}: _cssCustom line {i} has {flat.count(';')} declarations; use one per line")
+        if flat == "}":
+            depth = max(depth - 1, 0)
+        indent = len(line) - len(line.lstrip(" "))
+        if indent % 2:
+            errors.append(f"{where}: _cssCustom line {i} indent is not a multiple of 2 spaces")
+        elif not flat.startswith(("}", "/*", "*")) and indent < depth * 2:
+            errors.append(f"{where}: _cssCustom line {i} should be indented {depth * 2} spaces")
+        if flat.endswith("{"):
+            depth += 1
+    if "{" in css and "\n" not in css.strip():
+        errors.append(f"{where}: _cssCustom is minified onto one line; format one declaration per line")
+
+
 def check_framework(where, settings, errors, warns, is_class):
     if not isinstance(settings, dict):
         return
@@ -154,6 +190,7 @@ def check_framework(where, settings, errors, warns, is_class):
                 warns.append(f"{where}: _cssCustom should target %root%")
             if RAW_COLOR_RE.search(val):
                 warns.append(f"{where}: _cssCustom contains a raw colour -> use a colour token")
+            check_css_format(where, val, errors, warns)
         if base in TOKEN_LEN_KEYS:
             for sv in walk_strings(val):
                 if "var(" not in sv and RAW_LEN_RE.search(sv):

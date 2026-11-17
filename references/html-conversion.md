@@ -23,7 +23,7 @@ Don't convert framework code directly. First produce clean semantic HTML + stand
 5. **Convert CSS to native settings on the class** using the property map below, with every value snapped to a SkeleBricks token.
 6. **Pseudo-classes and states** → `key:pseudo` suffixes (`_background:hover`). Pseudo-elements and complex selectors → `_cssCustom`.
 7. **Media queries** → breakpoint suffixes. Translate the source's min/max widths to the nearest Bricks breakpoint key (and the site's mobile-first / desktop-first mode from the profile).
-8. **Residual CSS** (anything without a native UI control, e.g. `box-shadow: var(--shadow-m)`, `::before`, `@keyframes`, `.block:hover .block__icon`) → the class's `_cssCustom`, targeting `%root%`.
+8. **Residual CSS** (anything without a native UI control, e.g. `box-shadow: var(--shadow-m)`, `::before`, `@keyframes`, `.block:hover .block__icon`) → the class's `_cssCustom`, targeting `%root%` and formatted one declaration per line (framework/PROFILE.md §4a).
 9. **JavaScript** → the tiers below, `_interactions` first.
 10. **Assets** → absolute URLs, see external-assets.md.
 11. **Label** every section by purpose (`Hero`, `Features`, `CTA`) and other elements by role.
@@ -75,7 +75,7 @@ Don't convert framework code directly. First produce clean semantic HTML + stand
 | `background-image: url()` | `_background.image.url` + `size` / `position` / `repeat` |
 | `background-image: linear-gradient()` | `_gradient` with `colors: [{color, stop}]` |
 | `border`, `border-radius` | `_border` (`width`, `style`, `color`, `radius`) |
-| `box-shadow` | SkeleBricks: `%root% { box-shadow: var(--shadow-m); }` in the class's `_cssCustom` (tokens are full shadow values) |
+| `box-shadow` | SkeleBricks: `box-shadow: var(--shadow-m);` in a `%root%` rule in the class's `_cssCustom` (tokens are full shadow values) |
 | `transform` (single functions) | `_transform` |
 | `transform` (chained, order matters) | `_cssCustom` |
 | `filter` | `_cssFilters` |

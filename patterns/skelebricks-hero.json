@@ -355,7 +355,7 @@
             "left": "var(--radius-l)"
           }
         },
-        "_cssCustom": "%root% { box-shadow: var(--shadow-l); }"
+        "_cssCustom": "%root% {\n  box-shadow: var(--shadow-l);\n}"
       }
     }
   ],
