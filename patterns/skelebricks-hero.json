@@ -1,0 +1,363 @@
+{
+  "content": [
+    {
+      "id": "hrosec",
+      "name": "section",
+      "parent": 0,
+      "children": [
+        "hrocon"
+      ],
+      "settings": {
+        "tag": "section",
+        "_cssGlobalClasses": [
+          "clhero"
+        ]
+      },
+      "label": "Hero"
+    },
+    {
+      "id": "hrocon",
+      "name": "container",
+      "parent": "hrosec",
+      "children": [
+        "hrocnt",
+        "hromed"
+      ],
+      "settings": {
+        "_cssGlobalClasses": [
+          "clhrct"
+        ]
+      },
+      "label": "Container"
+    },
+    {
+      "id": "hrocnt",
+      "name": "block",
+      "parent": "hrocon",
+      "children": [
+        "hrokck",
+        "hrohdg",
+        "hrotxt",
+        "hroact"
+      ],
+      "settings": {
+        "_cssGlobalClasses": [
+          "clhrcn"
+        ]
+      },
+      "label": "Content"
+    },
+    {
+      "id": "hrokck",
+      "name": "text-basic",
+      "parent": "hrocnt",
+      "children": [],
+      "settings": {
+        "text": "New in 2026",
+        "tag": "span",
+        "_cssGlobalClasses": [
+          "clhrkk"
+        ]
+      },
+      "label": "Kicker"
+    },
+    {
+      "id": "hrohdg",
+      "name": "heading",
+      "parent": "hrocnt",
+      "children": [],
+      "settings": {
+        "text": "Build faster with a framework you own",
+        "tag": "h1",
+        "_cssGlobalClasses": [
+          "clhrhd"
+        ]
+      },
+      "label": "Heading"
+    },
+    {
+      "id": "hrotxt",
+      "name": "text-basic",
+      "parent": "hrocnt",
+      "children": [],
+      "settings": {
+        "text": "Supporting copy that explains the offer in one or two sentences.",
+        "tag": "p",
+        "_cssGlobalClasses": [
+          "clhrtx"
+        ]
+      },
+      "label": "Text"
+    },
+    {
+      "id": "hroact",
+      "name": "block",
+      "parent": "hrocnt",
+      "children": [
+        "hrobt1",
+        "hrobt2"
+      ],
+      "settings": {
+        "_cssGlobalClasses": [
+          "clhrac"
+        ]
+      },
+      "label": "Actions"
+    },
+    {
+      "id": "hrobt1",
+      "name": "button",
+      "parent": "hroact",
+      "children": [],
+      "settings": {
+        "text": "Get started",
+        "tag": "a",
+        "link": {
+          "type": "external",
+          "url": "#pricing"
+        },
+        "_cssGlobalClasses": [
+          "clhrbt",
+          "clhrbp"
+        ]
+      },
+      "label": "Button Primary"
+    },
+    {
+      "id": "hrobt2",
+      "name": "button",
+      "parent": "hroact",
+      "children": [],
+      "settings": {
+        "text": "See features",
+        "tag": "a",
+        "link": {
+          "type": "external",
+          "url": "#features"
+        },
+        "_cssGlobalClasses": [
+          "clhrbt"
+        ]
+      },
+      "label": "Button"
+    },
+    {
+      "id": "hromed",
+      "name": "block",
+      "parent": "hrocon",
+      "children": [
+        "hroimg"
+      ],
+      "settings": {
+        "_cssGlobalClasses": [
+          "clhrmd"
+        ]
+      },
+      "label": "Media"
+    },
+    {
+      "id": "hroimg",
+      "name": "image",
+      "parent": "hromed",
+      "children": [],
+      "settings": {
+        "image": {
+          "url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200",
+          "size": "full"
+        },
+        "altText": "Laptop on a desk with code on screen",
+        "loading": "eager",
+        "_cssGlobalClasses": [
+          "clhrim"
+        ]
+      },
+      "label": "Image"
+    }
+  ],
+  "source": "bricksCopiedElements",
+  "sourceUrl": "https://example.com",
+  "version": "2.3.6",
+  "globalClasses": [
+    {
+      "id": "clhero",
+      "name": "hero",
+      "settings": {
+        "_padding": {
+          "top": "var(--space-4xl)",
+          "bottom": "var(--space-4xl)"
+        },
+        "_background": {
+          "color": {
+            "raw": "var(--bg-body)"
+          }
+        }
+      }
+    },
+    {
+      "id": "clhrct",
+      "name": "hero__container",
+      "settings": {
+        "_direction": "row",
+        "_alignItems": "center",
+        "_columnGap": "var(--space-2xl)",
+        "_widthMax": "var(--max-screen-width)",
+        "_direction:tablet_portrait": "column",
+        "_rowGap:tablet_portrait": "var(--space-xl)"
+      }
+    },
+    {
+      "id": "clhrcn",
+      "name": "hero__content",
+      "settings": {
+        "_rowGap": "var(--space-m)",
+        "_flexBasis": "0",
+        "_flexGrow": "1"
+      }
+    },
+    {
+      "id": "clhrkk",
+      "name": "hero__kicker",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-s)",
+          "font-weight": "600",
+          "letter-spacing": "0.1em",
+          "text-transform": "uppercase",
+          "color": {
+            "raw": "var(--primary)"
+          }
+        }
+      }
+    },
+    {
+      "id": "clhrhd",
+      "name": "hero__heading",
+      "settings": {
+        "_typography": {
+          "font-size": "var(--text-3xl)",
+          "line-height": "1.1",
+          "color": {
+            "raw": "var(--text-title)"
+          }
+        }
+      }
+    },
+    {
+      "id": "clhrtx",
+      "name": "hero__text",
+      "settings": {
+        "_widthMax": "55ch",
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "line-height": "1.6",
+          "color": {
+            "raw": "var(--text-body)"
+          }
+        }
+      }
+    },
+    {
+      "id": "clhrac",
+      "name": "hero__actions",
+      "settings": {
+        "_direction": "row",
+        "_columnGap": "var(--space-s)",
+        "_flexWrap": "wrap",
+        "_margin": {
+          "top": "var(--space-xs)"
+        }
+      }
+    },
+    {
+      "id": "clhrbt",
+      "name": "hero__btn",
+      "settings": {
+        "_padding": {
+          "top": "var(--space-xs)",
+          "right": "var(--space-l)",
+          "bottom": "var(--space-xs)",
+          "left": "var(--space-l)"
+        },
+        "_border": {
+          "width": {
+            "top": "1px",
+            "right": "1px",
+            "bottom": "1px",
+            "left": "1px"
+          },
+          "style": "solid",
+          "color": {
+            "raw": "var(--primary)"
+          },
+          "radius": {
+            "top": "var(--radius-full)",
+            "right": "var(--radius-full)",
+            "bottom": "var(--radius-full)",
+            "left": "var(--radius-full)"
+          }
+        },
+        "_typography": {
+          "font-size": "var(--text-m)",
+          "font-weight": "600",
+          "color": {
+            "raw": "var(--primary)"
+          }
+        },
+        "_cssTransition": "background-color 0.2s ease, color 0.2s ease",
+        "_background:hover": {
+          "color": {
+            "raw": "var(--primary-t-1)"
+          }
+        }
+      }
+    },
+    {
+      "id": "clhrbp",
+      "name": "hero__btn--primary",
+      "settings": {
+        "_background": {
+          "color": {
+            "raw": "var(--primary)"
+          }
+        },
+        "_typography": {
+          "color": {
+            "raw": "var(--always-light)"
+          }
+        },
+        "_background:hover": {
+          "color": {
+            "raw": "var(--primary-d-1)"
+          }
+        }
+      }
+    },
+    {
+      "id": "clhrmd",
+      "name": "hero__media",
+      "settings": {
+        "_flexBasis": "0",
+        "_flexGrow": "1"
+      }
+    },
+    {
+      "id": "clhrim",
+      "name": "hero__img",
+      "settings": {
+        "_width": "100%",
+        "_aspectRatio": "4/3",
+        "_objectFit": "cover",
+        "_border": {
+          "radius": {
+            "top": "var(--radius-l)",
+            "right": "var(--radius-l)",
+            "bottom": "var(--radius-l)",
+            "left": "var(--radius-l)"
+          }
+        },
+        "_cssCustom": "%root% { box-shadow: var(--shadow-l); }"
+      }
+    }
+  ],
+  "globalElements": []
+}
