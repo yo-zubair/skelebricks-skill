@@ -38,8 +38,20 @@ How to write them in Bricks settings:
 | Font size | `"_typography": { "font-size": "var(--text-xl)", "color": { "raw": "var(--text-title)" } }` |
 | Radius | `"_border": { "radius": { "top": "var(--radius-m)", "right": "var(--radius-m)", "bottom": "var(--radius-m)", "left": "var(--radius-m)" } }` |
 | Grid columns | `"_display": "grid", "_gridTemplateColumns": "var(--grid-3)"`, responsive `"_gridTemplateColumns:mobile_portrait": "var(--grid-1)"` |
-| Shadow | Tokens are full `box-shadow` values, and the `_boxShadow` control can't take one. Use custom CSS (formatted per §4a): `box-shadow: var(--shadow-m);` inside a `%root% { … }` rule |
-| Max width | `"_widthMax": "var(--max-screen-width)"` |
+| Shadow | **Bricks UI control** (`_boxShadow`), never custom CSS. Copy the values of the matching `--shadow-*` preset (table below) with colour `{ "raw": "var(--shadow)" }` |
+| Width / max width | **Never set `_width` or `_widthMax` with `--max-screen-width` on Containers.** SkeleBricks theme styles already apply it globally. Only set a width on a Container when the design needs one *narrower* than the global width (e.g. a prose column) |
+
+**Shadow presets for the `_boxShadow` control** (the `--shadow-*` tokens are whole `box-shadow` values, which the control can't take, so their values are entered into it instead):
+
+| Preset | `_boxShadow` value |
+|--------|--------------------|
+| `--shadow-xs` | `{ "values": { "offsetX": "0", "offsetY": "1px", "blur": "2px", "spread": "0" }, "color": { "raw": "var(--shadow)" } }` |
+| `--shadow-s` | `{ "values": { "offsetX": "0", "offsetY": "1.5px", "blur": "3px", "spread": "0" }, "color": { "raw": "var(--shadow)" } }` |
+| `--shadow-m` | `{ "values": { "offsetX": "0", "offsetY": "2px", "blur": "6px", "spread": "0" }, "color": { "raw": "var(--shadow)" } }` |
+| `--shadow-l` | `{ "values": { "offsetX": "0", "offsetY": "3px", "blur": "12px", "spread": "0" }, "color": { "raw": "var(--shadow)" } }` |
+| `--shadow-xl` | `{ "values": { "offsetX": "0", "offsetY": "6px", "blur": "48px", "spread": "0" }, "color": { "raw": "var(--shadow)" } }` |
+
+Snap any source shadow to the nearest preset. Hover shadows use `_boxShadow:hover` with another preset.
 
 Colour roles: headings `--text-title`, body copy `--text-body`, page background `--bg-body`, cards/panels `--bg-surface`, dividers/borders `--border`, subtle fills `--muted` or `*-t-1/2`, hover of primary `--primary-d-1`. Text on photos or always-dark panels uses `--always-light`.
 
@@ -49,7 +61,7 @@ Colour roles: headings `--text-title`, body copy `--text-body`, page background 
 |------|-------|
 | Where styles live | **On the BEM global class.** Use the class's native UI controls (`_padding`, `_margin`, `_typography`, `_background`, `_border`, `_gridTemplateColumns`, …) |
 | Element settings | **Content and structure only**: `text`, `tag`, `image`, `link`, `icon`, `_cssGlobalClasses`, `_cssId` (anchors), `_attributes`, `_conditions`, `_interactions`, `hasLoop`/`query`, nestable `_hidden` classes |
-| Properties without a UI control | In the class's **Custom CSS** (`_cssCustom`), targeting **`%root%`** (e.g. a `box-shadow` token, `%root%::before`, `%root%:hover .card__icon`), **formatted per §4a** |
+| Properties without a UI control | In the class's **Custom CSS** (`_cssCustom`), targeting **`%root%`** (e.g. `%root%::before`, `%root%:hover .card__icon`, `mask-image`, `@keyframes`), **formatted per §4a**. Never `box-shadow` or Container widths here |
 | Modifiers | Separate class stacked after the base (class ids `["crd001", "crdftd"]` → `.card .card--featured`), listed later in `globalClasses` so it wins |
 | Bricks theme styles / button `style` | Don't rely on them. Omit `style` on buttons; style via the button's BEM class |
 
@@ -61,7 +73,7 @@ Custom CSS must be readable in the Bricks Custom CSS editor: **one declaration p
 - Each declaration on its own line, indented **2 spaces**, ending with `;`
 - Closing brace `}` alone on its own line, at the selector's indent
 - One **blank line** between rules
-- A value with several comma-separated layers (multiple gradients, `transition`, `mask-image`, `box-shadow` lists, `font-family` stacks longer than the line) puts the property name on its own line and each layer on its own line, indented 4 spaces, with the final layer ending in `;`
+- A value with several comma-separated layers (multiple gradients, `transition`, `mask-image`, `font-family` stacks longer than the line) puts the property name on its own line and each layer on its own line, indented 4 spaces, with the final layer ending in `;`
 - Rules inside `@media` / `@supports` / `@container` are indented one more level (2 spaces)
 - Spaces, not tabs; no trailing whitespace; no comments unless they explain something non-obvious
 
@@ -122,7 +134,7 @@ Group all declarations for the same selector into one rule rather than repeating
 | Other tags | per references/html-conversion.md |
 | **Section labels** | Every section's `label` is its human name: `Hero`, `Features`, `CTA`, `Pricing`, `Testimonials`, `FAQ`, `Footer`. Never "Section" |
 | Other labels | Readable role names for the structure panel: `Container`, `Kicker`, `Heading`, `Actions`, `Card`… (match the BEM element) |
-| Container width | Section/container max width from `--max-screen-width` unless the Style Manager already sets it |
+| Container width | **Don't set it.** SkeleBricks theme styles apply `--max-screen-width` to Containers globally. No `_width` / `_widthMax` with that variable on Containers or their classes |
 | Icons | TODO | fallback: inline SVG (`svg` element / icon `library: "svg"`) |
 | Animations | TODO | fallback: none unless the design asks; then subtle `enterView` reveals |
 

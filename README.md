@@ -6,7 +6,7 @@ It can design from a brief or screenshot, or convert HTML/CSS/JS, React, Vue and
 
 ## What it does
 
-- **Closed token set**: every colour, space, font size, radius, shadow and grid uses an existing SkeleBricks variable. No new variables are created; brand differences become value changes to existing ones.
+- **Closed token set**: every colour, space, font size, radius and grid uses an existing SkeleBricks variable, and shadows use the SkeleBricks shadow presets through the Bricks box-shadow control. Container widths are left to the SkeleBricks theme styles. No new variables are created; brand differences become value changes to existing ones.
 - **BEM global classes**: semantic names like `.hero`, `.hero__container`, `.hero__kicker`, `.hero__heading`, `.hero__img`. Styles live on the classes, set through Bricks' native controls; anything without a control goes in the class's custom CSS targeting `%root%`.
 - **Clean structure**: `<section>` → Section, `<div>` → Block (the inner wrapper → Container), `<h1>`–`<h6>` → Heading, `<img>` → Image. Sections are labelled by purpose (Hero, Features, CTA, Pricing) in the structure panel.
 - **Verified settings shapes**: settings keys and value formats verified against the Bricks source, so nothing is silently ignored.

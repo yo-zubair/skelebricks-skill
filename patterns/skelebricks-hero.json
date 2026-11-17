@@ -200,7 +200,6 @@
         "_direction": "row",
         "_alignItems": "center",
         "_columnGap": "var(--space-2xl)",
-        "_widthMax": "var(--max-screen-width)",
         "_direction:tablet_portrait": "column",
         "_rowGap:tablet_portrait": "var(--space-xl)"
       }
@@ -355,7 +354,17 @@
             "left": "var(--radius-l)"
           }
         },
-        "_cssCustom": "%root% {\n  box-shadow: var(--shadow-l);\n}"
+        "_boxShadow": {
+          "values": {
+            "offsetX": "0",
+            "offsetY": "3px",
+            "blur": "12px",
+            "spread": "0"
+          },
+          "color": {
+            "raw": "var(--shadow)"
+          }
+        }
       }
     }
   ],

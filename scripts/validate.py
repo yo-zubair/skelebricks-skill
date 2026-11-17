@@ -25,6 +25,19 @@ BEM_RE = re.compile(r"^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--
 VAR_RE = re.compile(r"var\(\s*(--[A-Za-z0-9_-]+)")
 RAW_LEN_RE = re.compile(r"(?<![\w.-])-?\d*\.?\d+(px|rem|em)\b")
 RAW_COLOR_RE = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(rgba?|hsla?)\(")
+SHADOW_PRESETS = {("0", "1", "2", "0"), ("0", "1.5", "3", "0"), ("0", "2", "6", "0"), ("0", "3", "12", "0"), ("0", "6", "48", "0")}
+
+
+def norm_len(v):
+    s = str(v if v is not None else "0").strip().lower()
+    s = s[:-2] if s.endswith("px") else s
+    try:
+        f = float(s)
+        return str(int(f)) if f.is_integer() else str(f)
+    except ValueError:
+        return s
+
+
 ELEMENT_OK_UNDERSCORE = {"_cssGlobalClasses", "_cssId", "_attributes", "_conditions", "_interactions", "_hidden"}
 TOKEN_LEN_KEYS = {"_padding", "_margin", "_rowGap", "_columnGap", "_gap", "_gridGap"}
 
@@ -191,6 +204,8 @@ def check_framework(where, settings, errors, warns, is_class):
             if RAW_COLOR_RE.search(val):
                 warns.append(f"{where}: _cssCustom contains a raw colour -> use a colour token")
             check_css_format(where, val, errors, warns)
+            if re.search(r"(^|[\s;{])box-shadow\s*:", val):
+                errors.append(f"{where}: box-shadow in _cssCustom -> use the _boxShadow UI control with a --shadow-* preset")
         if base in TOKEN_LEN_KEYS:
             for sv in walk_strings(val):
                 if "var(" not in sv and RAW_LEN_RE.search(sv):
@@ -203,8 +218,16 @@ def check_framework(where, settings, errors, warns, is_class):
             for sv in val["radius"].values():
                 if isinstance(sv, str) and "var(" not in sv and RAW_LEN_RE.search(sv) and sv not in ("0", "0px"):
                     warns.append(f"{where}: border radius '{sv}' -> use a --radius-* token")
-        if base == "_boxShadow":
-            warns.append(f"{where}: _boxShadow control -> use %root% {{ box-shadow: var(--shadow-*); }} in _cssCustom")
+        if base == "_boxShadow" and isinstance(val, dict):
+            v = val.get("values", {}) if isinstance(val.get("values"), dict) else {}
+            sig = tuple(norm_len(v.get(k)) for k in ("offsetX", "offsetY", "blur", "spread"))
+            if sig not in SHADOW_PRESETS:
+                warns.append(f"{where}: '{key}' doesn't match a --shadow-* preset (xs/s/m/l/xl, see PROFILE.md §3)")
+            col = val.get("color", {})
+            if isinstance(col, dict) and col.get("raw") != "var(--shadow)":
+                warns.append(f"{where}: '{key}' colour should be {{\"raw\": \"var(--shadow)\"}}")
+        if base in ("_width", "_widthMax") and isinstance(val, str) and "--max-screen-width" in val:
+            errors.append(f"{where}: '{key}' uses --max-screen-width; SkeleBricks theme styles already apply it to Containers")
         if not is_class:
             if base == "_cssClasses":
                 warns.append(f"{where}: _cssClasses used; SkeleBricks styles only through BEM global classes")

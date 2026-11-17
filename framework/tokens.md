@@ -89,7 +89,7 @@ Naming: `-l-1…4` lighter shades, `-d-1…4` darker shades, `-t-1…4` transpar
 ## Layout, radius, shadow, grid
 
 ```css
---max-screen-width: 1440px;
+--max-screen-width: 1440px;   /* applied to Containers globally by the SkeleBricks theme styles; don't set it in JSON */
 --min-screen-width: 360px;
 --radius-xs: clamp(0.4rem,calc(0vw + 0.4rem),0.4rem);
 --radius-s: clamp(0.6rem,calc(0.19vw + 0.54rem),0.8rem);
@@ -97,6 +97,7 @@ Naming: `-l-1…4` lighter shades, `-d-1…4` darker shades, `-t-1…4` transpar
 --radius-l: clamp(1.6rem,calc(0.37vw + 1.48rem),2rem);
 --radius-xl: clamp(2.6rem,calc(0.56vw + 2.42rem),3.2rem);
 --radius-full: 999rem;
+/* --shadow-*: reference values only. Shadows are set with the Bricks _boxShadow control using these values (PROFILE.md §3) */
 --shadow-xs: 0 1px 2px var(--shadow);
 --shadow-s: 0 1.5px 3px var(--shadow);
 --shadow-m: 0 2px 6px var(--shadow);

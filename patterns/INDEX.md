@@ -11,7 +11,7 @@ Ready-to-use Bricks JSON. Two formats:
 
 | File | Format | Demonstrates |
 |------|--------|--------------|
-| [skelebricks-hero.json](skelebricks-hero.json) | clipboard | **SkeleBricks reference**: split hero, BEM classes, tokens only, base + modifier button, `%root%` shadow token |
+| [skelebricks-hero.json](skelebricks-hero.json) | clipboard | **SkeleBricks reference**: split hero, BEM classes, tokens only, base + modifier button, `_boxShadow` control with the `--shadow-l` preset, no Container width |
 | [hero-centered.json](hero-centered.json) | clipboard | Dark hero, radial gradient overlay, pill eyebrow, clamp() type, dual CTAs, mobile stacking |
 | [hero-split-image.json](hero-split-image.json) | clipboard | Two-column hero, asymmetric widths, entrance animation on media, social proof line |
 | [logo-strip.json](logo-strip.json) | clipboard | auto-fit grid, grayscale hover filter via global class |

@@ -98,6 +98,8 @@ Class: `{ "id": "clhero", "name": "hero", "settings": { "_padding": { "top": "va
 11. **Semantic HTML.** `tag` on sections/blocks, one `h1` per page, heading levels in order, alt text on images.
 12. **One ```json code block** as the final output, validated first.
 13. **External assets by absolute `url`**, never attachment `id`.
+14. **Shadows through the Bricks UI.** `_boxShadow` control with the matching `--shadow-*` preset values (PROFILE.md §3), never `box-shadow` in custom CSS.
+15. **No Container widths.** Never set `_width` / `_widthMax` to `--max-screen-width` on Containers or their classes; SkeleBricks theme styles apply it globally.
 
 ## Validation checklist
 
